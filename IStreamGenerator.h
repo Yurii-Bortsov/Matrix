@@ -9,7 +9,6 @@ class IStreamGenerator : public Generator
 {
 private:
 	std::istream& in;
-
 public:
 	/**
 	* @brief Конструктор класса

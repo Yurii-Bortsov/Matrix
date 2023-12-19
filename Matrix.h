@@ -8,8 +8,8 @@
 class Matrix 
 {
     private:
-        size_t rows; 
-        size_t columns; 
+        int rows; 
+        int columns; 
         std::vector<std::vector<int>> matrix;
     public:
         /**
@@ -17,17 +17,17 @@ class Matrix
          * \param rows Количество строк.
          * \param columns Количество столбцов.
          */
-        Matrix(size_t rows, size_t columns, Generator* generator);
+        Matrix(int rows, int columns, Generator* generator);
 
         /**
          * \brief Деструктор.
          */
-        ~Matrix();
+        ~Matrix() = default;
 
         /**
         * @brief Проверка на пустоту матрицы.
         */
-        bool is_empty() const;
+        bool isEmpty() const;
 
         /**
         * @brief Переопределение оператора вывода
@@ -41,44 +41,57 @@ class Matrix
         * @brief Вывод матрицы в строку
         * @return Матрица в строку
         */
-        std::string matrix_to_string() const;
+        std::string matrixString();
+        
+        /**
+         * \brief Метод для получения количества столбцов.
+        */
+        size_t getColumns();
+
+        /**
+         * \brief Метод для получения количества строк.
+        */
+        size_t getRows();
 
         /**
          * \brief Конструктор копирования.
          * \param other Ссылка на другой объект Matrix для копирования.
          */
-        Matrix(const Matrix& other);
+        Matrix(const Matrix& other) = default;
 
         /**
          * \brief Оператор присваивания.
          * \param other Ссылка на другой объект Matrix для присваивания.
-         * \return Ссылка на текущий объект после присваивания.
          */
-        Matrix& operator=(const Matrix& other);
+        Matrix& operator=(const Matrix& other) = default;
 
         /**
          * \brief Конструктор перемещения.
          * \param other R-value ссылка на другой объект Matrix для перемещения.
          */
-        Matrix(Matrix&& other) noexcept;
+        Matrix(Matrix&& other) noexcept = default;
 
         /**
          * \brief Оператор перемещения.
          * \param other R-value ссылка на другой объект Matrix для перемещения.
-         * \return Ссылка на текущий объект после перемещения.
          */
-        Matrix& operator=(Matrix&& other) noexcept;
+        Matrix& operator=(Matrix&& other) noexcept = default;
 
         /**
          * \brief Получение элемента матрицы.
          * \param rows Номер строки.
          * \param columns Номер столбца.
-         * \return Значение элемента матрицы.
          */
         int getElement(int rows, int columns);
 
         /**
-         * \brief Вывод матрицы в стандартный поток вывода.
+         * \brief Переопределение оператора []
+         * \param index Индекс матрицы.
          */
-        void print();
+        std::vector<int>& operator[](size_t index);
+
+        /**
+        * @brief Получение матрицы
+        */
+        std::vector<std::vector<int>> getMatrix();
 };

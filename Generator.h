@@ -1,7 +1,4 @@
 #pragma once
-#include "Generator.h"
-#include "RandomGenerator.h"
-#include "IStreamGenerator.h"
 
 /**
  * \brief Абстрактный класс для генератора случайных чисел.
