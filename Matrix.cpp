@@ -5,14 +5,19 @@
 
 Matrix::Matrix(const int rows, const int columns, Generator* generator) : rows(rows), columns(columns), matrix(rows, std::vector<int>(columns))
 {
-    if (generator && columns && rows > 0)
+    if (columns && rows < 0)
     {
-        for (size_t i = 0; i < static_cast<size_t>(rows); ++i)
+        throw std::invalid_argument("Неправильный размер матрицы.")
+    }
+    if (generator == nullptr)
+    {
+        throw std::invalid_argument("Ошибка генератора матрицы.")
+    }
+    for (size_t i = 0; i < static_cast<size_t>(rows); ++i)
+    {
+        for (size_t j = 0; j < static_cast<size_t>(columns); ++j)
         {
-            for (size_t j = 0; j < static_cast<size_t>(columns); ++j)
-            {
-                matrix[i][j] = generator->generate();
-            }
+            matrix[i][j] = generator->generate();
         }
     }
 }
@@ -49,16 +54,11 @@ size_t Matrix::getRows()
 
 std::vector<int>& Matrix::operator[](size_t index)
 {
-    if (index < matrix.size())
+    if (index > matrix.size())
     {
-        return matrix[index];
+        throw std::out_of_range("Индекс вне размера матрицы.");
     }
-    else 
-    {
-        std::cerr << "Ошибка: индекс за пределами вектора.";
-        static std::vector<int> dummy;
-        return dummy;
-    }
+    return matrix[index];
 }
 
 std::vector<std::vector<int>> Matrix::getMatrix()
