@@ -3,7 +3,7 @@
 #include <vector>
 #include <sstream>
 
-Matrix::Matrix(const int rows, const int columns, Generator* generator) : rows(rows), columns(columns), matrix(rows, std::vector<int>(columns))
+Matrix::Matrix(const size_t rows, const size_t columns, Generator* generator) : rows(rows), columns(columns), matrix(rows, std::vector<int>(columns))
 {
     if (columns && rows < 0)
     {
@@ -13,9 +13,9 @@ Matrix::Matrix(const int rows, const int columns, Generator* generator) : rows(r
     {
         throw std::invalid_argument("Ошибка генератора матрицы.")
     }
-    for (size_t i = 0; i < static_cast<size_t>(rows); ++i)
+    for (size_t i = 0; i < rows; ++i)
     {
-        for (size_t j = 0; j < static_cast<size_t>(columns); ++j)
+        for (size_t j = 0; j < columns; ++j)
         {
             matrix[i][j] = generator->generate();
         }
